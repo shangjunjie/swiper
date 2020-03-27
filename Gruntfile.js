@@ -8,7 +8,7 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     var swiper = {
-        filename: 'idangerous.swiper'
+        filename: 'swiper'
     };
 
     // Project configuration.

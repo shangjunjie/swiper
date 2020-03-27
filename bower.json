@@ -12,11 +12,11 @@
   "dependencies": {
   },
   "scripts": [
-    "dist/idangerous.swiper.js"
+    "dist/swiper.js"
   ],
   "main": [
-    "dist/idangerous.swiper.js",
-    "dist/idangerous.swiper.css"
+    "dist/swiper.js",
+    "dist/swiper.css"
   ],
   "license": ["GPL", "MIT"],
   "dependencies": {},

@@ -6,8 +6,8 @@
   ```html
   <head>
     ....
-    <link rel="stylesheet" href="path_to_css/idangerous.swiper.css">
-    <script defer src="path_to_js/idangerous.swiper-2.x.min.js"></script>
+    <link rel="stylesheet" href="path_to_css/swiper.css">
+    <script defer src="path_to_js/swiper-2.x.min.js"></script>
     ....
   </head>
   ```
@@ -36,7 +36,7 @@
   </div>
   ```
 
-4. Open idangerous.swiper.css and set the Swiper's width and height (in the end of the file):
+4. Open swiper.css and set the Swiper's width and height (in the end of the file):
 
   ```css
   ...
