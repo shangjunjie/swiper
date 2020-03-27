@@ -202,6 +202,18 @@ var Swiper = function (selector, params) {
         paginationVisibleClass: 'swiper-visible-switch'
     };
     params = params || {};
+    var originalParams = {};
+    for (var param in params) {
+        if (typeof params[param] === 'object' && params[param] !== null && !(params[param].nodeType || params[param] === window || params[param] === document || (typeof jQuery !== 'undefined' && params[param] instanceof jQuery))) {
+            originalParams[param] = {};
+            for (var deepParam in params[param]) {
+                originalParams[param][deepParam] = params[param][deepParam];
+            }
+        }
+        else {
+            originalParams[param] = params[param];
+        }
+    }
     for (var prop in defaults) {
         if (prop in params && typeof params[prop] === 'object') {
             for (var subProp in defaults[prop]) {
@@ -215,6 +227,7 @@ var Swiper = function (selector, params) {
         }
     }
     _this.params = params;
+    _this.originalParams = originalParams;
     if (params.scrollContainer) {
         params.freeMode = true;
         params.freeModeFluid = true;
@@ -224,6 +237,51 @@ var Swiper = function (selector, params) {
     }
     var isH = params.mode === 'horizontal';
 
+    /*=========================
+    Breakpoints
+    ===========================*/
+    _this.currentBreakpoint = undefined;
+    _this.getActiveBreakpoint = function () {
+        //Get breakpoint for window width
+        if (!_this.params.breakpoints) return false;
+        var breakpoint = false;
+        var points = [], point;
+        for ( point in _this.params.breakpoints ) {
+            if (_this.params.breakpoints.hasOwnProperty(point)) {
+                points.push(point);
+            }
+        }
+        points.sort(function (a, b) {
+            return parseInt(a, 10) > parseInt(b, 10);
+        });
+        for (var i = 0; i < points.length; i++) {
+            point = points[i];
+            if (point >= window.innerWidth && !breakpoint) {
+                breakpoint = point;
+            }
+        }
+        return breakpoint || 'max';
+    };
+    _this.setBreakpoint = function () {
+        //Set breakpoint for window width and update parameters
+        var breakpoint = _this.getActiveBreakpoint();
+        if (breakpoint && _this.currentBreakpoint !== breakpoint) {
+            var breakPointsParams = breakpoint in _this.params.breakpoints ? _this.params.breakpoints[breakpoint] : _this.originalParams;
+            // var needsReLoop = _this.params.loop && (breakPointsParams.slidesPerView !== _this.params.slidesPerView);
+            for ( var param in breakPointsParams ) {
+                _this.params[param] = breakPointsParams[param];
+            }
+            _this.currentBreakpoint = breakpoint;
+            // if(needsReLoop && s.destroyLoop) {
+            //     s.reLoop(true);
+            // }
+        }
+    };
+    // Set breakpoint on load
+    if (_this.params.breakpoints) {
+        _this.setBreakpoint();
+    }
+  
     /*=========================
       Define Touch Events
       ===========================*/
@@ -834,7 +892,12 @@ var Swiper = function (selector, params) {
     };
 
     _this.resizeFix = function (reInit) {
+
         _this.callPlugins('beforeResizeFix');
+
+        if (_this.params.breakpoints) {
+          _this.setBreakpoint();
+        }
 
         _this.init(params.resizeReInit || reInit);
 
