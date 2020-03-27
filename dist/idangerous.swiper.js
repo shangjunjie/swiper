@@ -4,13 +4,13 @@
  *
  * http://www.idangero.us/sliders/swiper/
  *
- * Copyright 2010-2015, Vladimir Kharlampidi
+ * Copyright 2010-2020, Vladimir Kharlampidi
  * The iDangero.us
  * http://www.idangero.us/
  *
  * Licensed under GPL & MIT
  *
- * Released on: February 11, 2015
+ * Released on: March 27, 2020
 */
 var Swiper = function (selector, params) {
     'use strict';
@@ -1977,8 +1977,8 @@ var Swiper = function (selector, params) {
         }
 
         if (_this.support.transitions || !params.DOMAnimation) {
-            _this.setWrapperTranslate(newPosition);
             _this.setWrapperTransition(speed);
+            _this.setWrapperTranslate(newPosition);
         }
         else {
             //Try the DOM animation
