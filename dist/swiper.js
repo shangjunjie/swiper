@@ -1840,11 +1840,13 @@ var Swiper = function (selector, params) {
         else {
             var groupSize = slideSize * params.slidesPerGroup;
             newPosition = -(Math.floor(Math.abs(currentPosition) / Math.floor(groupSize)) * groupSize + groupSize);
+            
         }
+        
         if (newPosition < -maxWrapperPosition()) {
             newPosition = -maxWrapperPosition();
         }
-        if (newPosition === currentPosition) return false;
+        if (newPosition === currentPosition - 0) return false;
         swipeToPosition(newPosition, 'next', {runCallbacks: runCallbacks});
         return true;
     };

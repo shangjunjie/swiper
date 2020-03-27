@@ -1830,7 +1830,7 @@ var Swiper = function (selector, params) {
         if (newPosition < -maxWrapperPosition()) {
             newPosition = -maxWrapperPosition();
         }
-        if (newPosition === currentPosition) return false;
+        if (newPosition === currentPosition - 0) return false;
         swipeToPosition(newPosition, 'next', {runCallbacks: runCallbacks});
         return true;
     };
