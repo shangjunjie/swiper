@@ -49,6 +49,8 @@
 
   * **Ultra lightweight**. Only 3.2 KB minified and gzipped
 
+  * **Breakpoints**. 这是新增功能
+
 _**With all these features you can build amazing touch interfaces and apps with awesome native behavior.**_
 
 ## Demos & Usage
