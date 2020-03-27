@@ -1840,9 +1840,7 @@ var Swiper = function (selector, params) {
         else {
             var groupSize = slideSize * params.slidesPerGroup;
             newPosition = -(Math.floor(Math.abs(currentPosition) / Math.floor(groupSize)) * groupSize + groupSize);
-            
         }
-        
         if (newPosition < -maxWrapperPosition()) {
             newPosition = -maxWrapperPosition();
         }
